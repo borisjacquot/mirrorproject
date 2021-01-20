@@ -16,7 +16,7 @@ const lepasdecalais = https.get("https://outlook.live.com/owa/calendar/00000000-
  
 //parse the calendar and print it
 const data = ical.parseFile("calendar.ics");
- 
+
 for (let k in data) {
     if (data.hasOwnProperty(k)) {
         var ev = data[k];
@@ -28,7 +28,7 @@ for (let k in data) {
 		    }
 		    if (ev.location !== "") {
 			message += " à " + ev.location;
-		    }
+			}
 		    console.log(message);
 	    }
         }
