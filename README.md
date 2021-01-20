@@ -14,6 +14,7 @@ Calendrier : affiche les évenements du jour venant d'un calendrier électroniqu
 
 News : affiche les titres des derniers articles d'un média choisi parmi les disponibles
 
+Meteo : Affiche la température et la description de la météo.
 
 
 
