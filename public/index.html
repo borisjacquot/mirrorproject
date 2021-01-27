@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Hello World!</title>
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
+</head>
+<body style="background: black; color: white">
+    <h1>Hello World!</h1>
+    <p id="temp"></p>
+    <script>
+        const electron = require('electron');
+        const ipcRenderer = electron.ipcRenderer;
+
+        ipcRenderer.on('temp', (event,data) => {
+            document.getElementById('temp').innerHTML = data;
+        })
+    </script>
+</body>
+</html>
