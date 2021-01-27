@@ -1,4 +1,4 @@
-const test = require('./main.js');
+const test = require('../main.js');
 const https = require('https');
 const http = require('http');
 const city = 'Lille';
