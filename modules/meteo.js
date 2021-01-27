@@ -12,12 +12,14 @@ module.exports.temp= function (){
         });
         response.on("end", function () {
             try{
-            var data_weather = JSON.parse(body);
-            console.log(city, data_weather.main.temp);
-            console.log(city, data_weather.weather[0].main, data_weather.weather[0].description);
+                var data_weather = JSON.parse(body);
+                console.log(city, data_weather.main.temp);
+                console.log(city, data_weather.weather[0].main, data_weather.weather[0].description);
             }catch(error){
                 console.error(error);
             }
         });
     });
+
+    return city;
 }
