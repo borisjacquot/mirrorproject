@@ -1,11 +1,11 @@
 var Feed = require('rss-to-json');
 var schedule = require('node-schedule');
-var article = 0;
+let article = {"title": undefined, "description": undefined};
 
-var j = schedule.scheduleJob('*/3 * * * * *', function(){
+module.exports.news = function(){
   Feed.load('https://lemonde.fr/rss/une.xml', function(err, rss){
-    console.log(rss.items[0].title);
-    console.log(rss.items[0].description);
+    article.title = rss.items[0].title;
+    article.description = rss.items[0].description);
   });
-  article = (article + 1) % 4;
-});
+  return article;
+};
