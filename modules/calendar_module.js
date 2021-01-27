@@ -8,16 +8,11 @@ const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', '
 let date_ob = new Date();
 let message = "";
 
-//download the iCalendar file
 const file = fs.createWriteStream("calendar.ics");
 const lepasdecalais = https.get("https://outlook.live.com/owa/calendar/00000000-0000-0000-0000-000000000000/d7f43f54-f27b-4ede-a932-38eacb92fac9/cid-745EC78AC30C3AC4/calendar.ics", function(response) {
   response.pipe(file);
-});
- 
-//parse the calendar and print it
-const data = ical.parseFile("calendar.ics");
-
-for (let k in data) {
+  const data = ical.parseFile("calendar.ics");
+  for (let k in data) {
     if (data.hasOwnProperty(k)) {
         var ev = data[k];
         if (data[k].type == 'VEVENT') {
@@ -33,4 +28,6 @@ for (let k in data) {
 	    }
         }
     }
-}
+  }
+});
+ 
