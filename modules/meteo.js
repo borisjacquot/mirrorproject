@@ -2,9 +2,10 @@ const test = require('../main.js');
 const https = require('https');
 const http = require('http');
 const city = 'Lille';
+require('dotenv').config();
 
 module.exports.temp= function (){
-    var request = http.get(`http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=6db93a028b58851dcd81193539d903de&units=metric`, function (response){
+    var request = http.get(`http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${process.env.OPENWEATHER}&units=metric`, function (response){
         var body = "";
         response.on('data', function (chunk) {
             body += chunk;
