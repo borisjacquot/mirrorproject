@@ -1,7 +1,7 @@
 const https = require('https');
 const http = require('http');
 const city = 'Lille';
-let dataToSend = {"temp": undefined, "description": undefined};
+let dataToSend = {"temp": undefined, "description": undefined, "icon": undefined};
 require('dotenv').config();
 
 module.exports.temp= function (){
@@ -14,7 +14,9 @@ module.exports.temp= function (){
         try{
             var data_weather = JSON.parse(body);
             dataToSend.temp=data_weather.main.temp;
+            dataToSend.icon=data_weather.weather[0].icon;
             dataToSend.description=data_weather.weather[0].main;
+            // console.log(dataToSend )
         }catch(error){
             console.log(error);
         }
