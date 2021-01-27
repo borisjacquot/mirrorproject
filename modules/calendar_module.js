@@ -9,7 +9,7 @@ const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', '
 let date_ob = new Date();
 let message = "";
 const file = fs.createWriteStream("calendar.ics");
-let event = {"summary": undefined, "start": undefined, "end": undefined, "location": undefined}
+let event = []
 
 module.exports.calendar = function(){
 	const download = https.get("https://outlook.live.com/owa/calendar/00000000-0000-0000-0000-000000000000/d7f43f54-f27b-4ede-a932-38eacb92fac9/cid-745EC78AC30C3AC4/calendar.ics", function(response) {
@@ -20,14 +20,7 @@ module.exports.calendar = function(){
 				var ev = data[k];
 				if (data[k].type == 'VEVENT') {
 					if (ev.start.getFullYear() === date_ob.getFullYear() && ev.start.getMonth() === date_ob.getUTCMonth() && ev.start.getDate() === date_ob.getUTCDate()) {
-						event.summary = ev.summary;
-						if (ev.start.toLocaleTimeString('fr-FR') !== "00:00:00" && ev.end.toLocaleTimeString('fr-FR') !== "00:00:00") {
-							event.start = ev.start.toLocaleTimeString('fr-FR');
-							event.end = ev.end.toLocaleTimeString('fr-FR');
-						}
-						if (ev.location !== "") {
-							event.location = ev.location;
-						}
+						event.push({"summary": ev.summary, "start": ev.start.toLocaleTimeString('fr-FR'), "end": ev.end.toLocaleTimeString('fr-FR'), "location": ev.location});
 					}
 				}
 			}
