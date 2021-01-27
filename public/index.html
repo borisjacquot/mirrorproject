@@ -2,18 +2,47 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Hello World!</title>
+    <title>MagicMirror</title>
+    <link rel="stylesheet" href="uikit.css" />
+    <script src="uikit.js"></script>
     <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
 </head>
-<body style="background: black; color: white">
-    <h1>Hello World!</h1>
-    <p id="temp"></p>
+<body>
+    <div class="uk-container">
+        <!-- module compliments -->
+        <h1 style="color: white" class="uk-heading-line uk-text-center uk-margin-large-top"><span id="compl">You’re stunning.</span></h1>
+
+        <!-- module météo -->
+        <div class="uk-card uk-width-1-2@m uk-margin-large">
+            <div class="uk-card-header">
+                <div class="uk-grid-small uk-flex-middle" uk-grid>
+                    <div class="uk-width-auto">
+                        <img id="icon" class="uk-border-circle" width="100" height="100" src="http://openweathermap.org/img/wn/01d@2x.png">
+                    </div>
+                    <div class="uk-width-expand">
+                        <h3 id="temp" style="color: #dfdfdf" class="uk-card-title uk-margin-remove-bottom">- °C</h3>
+                        <p id="ville" class="uk-text-meta uk-margin-remove-top">Ville</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
     <script>
         const electron = require('electron');
         const ipcRenderer = electron.ipcRenderer;
 
+        /* météo */
         ipcRenderer.on('temp', (event,data) => {
-            document.getElementById('temp').innerHTML = data;
+            document.getElementById('temp').innerHTML = data.main.temp + "°C";
+            document.getElementById('ville').innerHTML = data.name;
+            document.getElementById('icon').setAttribute('src', 'http://openweathermap.org/img/wn/' + data.weather[0].icon + '@2x.png');
+        })
+
+        /* compliments */
+        ipcRenderer.on('compl', (event,data) => {
+            document.getElementById('compl').innerHTML = data;
         })
     </script>
 </body>
