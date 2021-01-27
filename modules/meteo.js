@@ -1,4 +1,3 @@
-const test = require('../main.js');
 const https = require('https');
 const http = require('http');
 const city = 'Lille';
@@ -13,14 +12,11 @@ module.exports.temp= function (){
         });
         response.on("end", function () {
         try{
-        var data_weather = JSON.parse(body);
-        console.log(city, data_weather.main.temp);
-        console.log(city, data_weather.weather[0].main);
-        dataToSend.temp=data_weather.main.temp;
-        dataToSend.description=data_weather.weather[0].main;
-        console.log(dataToSend)
+            var data_weather = JSON.parse(body);
+            dataToSend.temp=data_weather.main.temp;
+            dataToSend.description=data_weather.weather[0].main;
         }catch(error){
-            console.error(error);
+            console.log(error);
         }
         });
     });
