@@ -7,7 +7,6 @@ const ical = require('ical');
 const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
 let date_ob = new Date();
-console.log(date_ob.getFullYear());
 let message = "";
 let event = []
 
