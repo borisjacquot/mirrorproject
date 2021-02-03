@@ -1,6 +1,12 @@
 const { app, BrowserWindow } = require('electron')
 const meteo = require('./modules/meteo.js');
 const compliment = require('./modules/compliment.js');
+const calendar = require("./modules/calendar_module");
+const news = require("./modules/news_module");
+
+// calendar.download_calendar(); // on dl le calendar
+// console.log(news.news()); // TODO
+// console.log(calendar.calendar());
 
 function createWindow () {
     const win = new BrowserWindow({

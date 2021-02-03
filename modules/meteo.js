@@ -13,7 +13,6 @@ module.exports.temp= function (){
         response.on("end", function () {
         try{
             dataToSend = JSON.parse(body);
-             console.log(dataToSend )
         }catch(error){
             console.log(error);
         }
