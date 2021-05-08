@@ -1,11 +1,12 @@
 const { app, BrowserWindow } = require('electron')
 const meteo = require('./modules/meteo.js');
+const spotify = require('./modules/spotify.js');
 const compliment = require('./modules/compliment.js');
 const calendar = require("./modules/calendar_module");
 const news = require("./modules/news_module");
 const {ipcMain}  = require('electron');
 
-//calendar.download_calendar(); // on dl le calendar
+calendar.download_calendar(); // on dl le calendar
 // console.log(news.news()); // TODO
 
 function createWindow () {
@@ -30,6 +31,12 @@ function createWindow () {
     // meteo
     setInterval(() => {
         win.webContents.send('temp', meteo.temp());
+    },1000);
+
+    // spotify
+    setInterval(async () => {
+        const song = await spotify.spotify()
+        win.webContents.send('spotify',song);
     },1000);
 
     // news

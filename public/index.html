@@ -18,6 +18,12 @@
             <h1 style="color: white"><span id="descr">News</span></h1>
         </div>
 
+        <!-- module spotify -->
+        <div class="uk-position-large uk-position-center-right"> 
+            <h1 style="color: white"><span id="name">Name</span></h1>
+            <h1 style="color: white"><span id="artists">Artists</span></h1>
+        </div>
+
         <!-- module calendar -->
         <div class="uk-position-large uk-position-top-left"> 
             <h1 style="color: white"><span id="calendar">Calendar</span></h1>
@@ -71,6 +77,12 @@
         ipcRenderer.on('news', (event,data) => {
             document.getElementById('title').innerHTML = data.title;
             document.getElementById('descr').innerHTML = data.desc;
+        })
+
+        /* spotify */
+        ipcRenderer.on('spotify', (event,data) => {
+            document.getElementById('name').innerHTML = data.Name;
+            document.getElementById('artists').innerHTML = data.Artists;
         })
 
         /* calendar */
