@@ -11,21 +11,17 @@ module.exports.news = function(){
   });
   return article;*/
 
-    parser.parseURL('https://lemonde.fr/rss/une.xml', function (err, feed) {
-        for (let i = 0; i < 5; i++) {
-            articles.push({
-                "title": feed.items[i].title,
-                "desc": feed.items[i].description
-            });
-        }
+    const promise1 = new Promise((resolve, reject) => {
+        parser.parseURL('https://lemonde.fr/rss/une.xml', function (err, feed) {
+                for (let i = 0; i < 5; i++) {
+                    articles.push({
+                        "title": feed.items[i].title,
+                        "desc": feed.items[i].content
+                    });
+                }
+        });
+        resolve(articles);
     });
-
-    setTimeout(() => {
-        return articles;
-    }, 3000);
-
-
-
-
-
+    return articles;
+   
 };

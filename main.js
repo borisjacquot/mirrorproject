@@ -3,10 +3,10 @@ const meteo = require('./modules/meteo.js');
 const compliment = require('./modules/compliment.js');
 const calendar = require("./modules/calendar_module");
 const news = require("./modules/news_module");
+const {ipcMain}  = require('electron');
 
-// calendar.download_calendar(); // on dl le calendar
+//calendar.download_calendar(); // on dl le calendar
 // console.log(news.news()); // TODO
-// console.log(calendar.calendar());
 
 function createWindow () {
     const win = new BrowserWindow({
@@ -31,7 +31,33 @@ function createWindow () {
     setInterval(() => {
         win.webContents.send('temp', meteo.temp());
     },1000);
-}
+
+    // news
+    let j = 0;
+    setInterval(() => {
+        const newstab = news.news();
+        win.webContents.send('news', newstab[j]);
+        j++;
+        if ( j!= undefined && j > newstab.length ) j = 0;
+    },5000);
+
+    // calendar
+    setInterval(() => {
+        const calendartab = calendar.calendar();
+        win.webContents.send('calendar', calendartab[0]);
+    },1000);
+    
+}  
+
+// minuteur
+ipcMain.on("btnclick",function (event, arg) {
+    let time = arg;
+    setInterval(function() { 
+        if(time==0){return;}
+        time--; 
+        event.sender.send("timer", time); 
+    }, 1000);
+})
 
 app.whenReady().then(createWindow)
 
@@ -46,3 +72,4 @@ app.on('activate', () => {
         createWindow()
     }
 })
+

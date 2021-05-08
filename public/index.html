@@ -12,6 +12,23 @@
         <!-- module compliments -->
         <h1 style="color: white" class="uk-heading-line uk-text-center uk-margin-large-top"><span id="compl">You’re stunning.</span></h1>
 
+        <!-- module news -->
+        <div class="uk-position-large uk-position-bottom-center"> 
+            <h1 style="color: white"><span id="title">News</span></h1>
+            <h1 style="color: white"><span id="descr">News</span></h1>
+        </div>
+
+        <!-- module calendar -->
+        <div class="uk-position-large uk-position-top-left"> 
+            <h1 style="color: white"><span id="calendar">Calendar</span></h1>
+        </div>
+
+        <!-- module timer -->
+        <div class="uk-position-large uk-position-top-right"> 
+            <button id="button" style="color: white" class="uk-button uk-button-default ">Timer</button>
+            <h1 style="color: white"><span id="timer">30</span></h1> 
+        </div>
+        
         <!-- module météo -->
         <div class="uk-card uk-width-1-2@m uk-margin-large">
             <div class="uk-card-header">
@@ -44,6 +61,29 @@
         ipcRenderer.on('compl', (event,data) => {
             document.getElementById('compl').innerHTML = data;
         })
+
+        /*Timer*/
+        ipcRenderer.on('timer', (event,data) => { 
+            document.getElementById('timer').innerHTML = data;    
+        })
+
+        /* news */
+        ipcRenderer.on('news', (event,data) => {
+            document.getElementById('title').innerHTML = data.title;
+            document.getElementById('descr').innerHTML = data.desc;
+        })
+
+        /* calendar */
+        ipcRenderer.on('calendar', (event,data) => {
+            document.getElementById('calendar').innerHTML = data.summary;
+        })
+
+        const btnclick = document.getElementById('button');
+        btnclick.addEventListener('click', function () {
+            var arg =30;
+            //send the info to main process . we can pass any arguments as second param.
+            ipcRenderer.send("btnclick", arg); // ipcRender.send will pass the information to main process
+        });
     </script>
 </body>
 </html>

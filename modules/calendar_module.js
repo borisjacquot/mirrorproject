@@ -5,7 +5,7 @@ const fs = require('fs');
 const ical = require('ical');
 
 let date_ob = new Date();
-let event = []
+
 
 module.exports.download_calendar = function(){
 	const file = fs.createWriteStream("calendar.ics");
@@ -15,24 +15,27 @@ module.exports.download_calendar = function(){
 };
 
 module.exports.calendar = function(){
-	const data = ical.parseFile("calendar.ics");
-	for (let k in data) {
-		console.log(k);
-		if (data.hasOwnProperty(k)) {
-			var ev = data[k];
-			console.log(ev);
-			if (data[k].type == 'VEVENT') {
-				if (ev.start.getFullYear() === date_ob.getFullYear() && ev.start.getMonth() === date_ob.getUTCMonth() && ev.start.getDate() === date_ob.getUTCDate()) {
-					event.push({
-						"summary": ev.summary,
-						"start": ev.start.toLocaleTimeString('fr-FR'),
-						"end": ev.end.toLocaleTimeString('fr-FR'),
-						"location": ev.location
-					});
+	let event = []
+	const promise1 = new Promise((resolve, reject) => {
+		const data = ical.parseFile("calendar.ics");
+		for (let k in data) {
+			//console.log(k);
+			if (data.hasOwnProperty(k)) {
+				var ev = data[k];
+				//console.log(ev);
+				if (data[k].type == 'VEVENT') {
+					if (ev.start.getFullYear() === date_ob.getFullYear() && ev.start.getMonth() === date_ob.getUTCMonth() && ev.start.getDate() === date_ob.getUTCDate()) {
+						event.push({
+							"summary": ev.summary,
+							"start": ev.start.toLocaleTimeString('fr-FR'),
+							"end": ev.end.toLocaleTimeString('fr-FR'),
+							"location": ev.location
+						});
+					}
 				}
 			}
 		}
-	}
-	console.log(event);
+		resolve(event);
+	});
 	return event;
 };
