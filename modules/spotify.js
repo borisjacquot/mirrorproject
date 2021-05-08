@@ -17,8 +17,10 @@ const superagent = require('superagent');
   }*/
 const spotifyApi = new SpotifyWebApi();
 
+// Pour avoir le token, go sur https://developer.spotify.com/console/get-users-currently-playing-track/ et faire getToken et cocher toutes les permissions.
 const token =
   "BQBiOFEwbe1_7R7DhdYOq9Nv5oRqQUTFCM3xajMTSi7H6R0kOSzsZJofsRhocQ2_AJPR1yYbe8BIRBkh2sd_Va8LmHCXqcS46JcbCYvnAO5qh61EFp5RmF9Rpfh0S7IyONg4vP7k20MYvxwhbY6bWXiDKfJpunNvc48nHi6oY9vCIXIyxpFBqvmxtgLzQ-KSxgjCpLTAfnGUmoCrZYmPqyBjzLZyElxG3_J542XMmb4uVBNZ8ufPOUynPKib28Yu2pAdTps4xUaSgPHOH0UIeQsDmDUG-1eL2WP3m0VLQB7R";
+
 
   /*
 var redirect ="";
