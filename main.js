@@ -2,6 +2,7 @@ const { app, BrowserWindow } = require('electron')
 const meteo = require('./modules/meteo.js');
 const spotify = require('./modules/spotify.js');
 const compliment = require('./modules/compliment.js');
+const date_ob = require('./modules/date.js');
 const calendar = require("./modules/calendar_module");
 const news = require("./modules/news_module");
 const {ipcMain}  = require('electron');
@@ -35,7 +36,7 @@ function createWindow () {
 
     // spotify
     setInterval(async () => {
-        const song = await spotify.spotify()
+        const song = await spotify.spotify();
         win.webContents.send('spotify',song);
     },1000);
 
@@ -52,6 +53,15 @@ function createWindow () {
     setInterval(() => {
         const calendartab = calendar.calendar();
         win.webContents.send('calendar', calendartab[0]);
+    },1000);
+
+    // clock
+    setInterval(() => {
+        let date= new Date();
+        const complete_date = date.getDate() + " " + date_ob.month(date.getMonth()) + " " + date.getFullYear(); 
+        const hour = date.getHours() + ":" + date.getMinutes();
+        const date_plus_hour = {"date": complete_date,"hour": hour}
+        win.webContents.send('date',date_plus_hour);
     },1000);
     
 }  

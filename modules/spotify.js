@@ -19,7 +19,7 @@ const spotifyApi = new SpotifyWebApi();
 
 // Pour avoir le token, go sur https://developer.spotify.com/console/get-users-currently-playing-track/ et faire getToken et cocher toutes les permissions.
 const token =
-  "BQBiOFEwbe1_7R7DhdYOq9Nv5oRqQUTFCM3xajMTSi7H6R0kOSzsZJofsRhocQ2_AJPR1yYbe8BIRBkh2sd_Va8LmHCXqcS46JcbCYvnAO5qh61EFp5RmF9Rpfh0S7IyONg4vP7k20MYvxwhbY6bWXiDKfJpunNvc48nHi6oY9vCIXIyxpFBqvmxtgLzQ-KSxgjCpLTAfnGUmoCrZYmPqyBjzLZyElxG3_J542XMmb4uVBNZ8ufPOUynPKib28Yu2pAdTps4xUaSgPHOH0UIeQsDmDUG-1eL2WP3m0VLQB7R";
+  "BQAcAx8UWmfSu35FfLXJCNGyN7zHp4LuZP8RSPXWvavICTZ5JCiRjb-pj6XbZsWE2Hxwn9jFnXZ5mtuJNvSY9Y9ntcEL_YYeRLtyHTaxjunsqBf6vtdOYc8Y1-dNDX1kogcRB8Nqg6XyTjN4pxAoCMDFysh04QMCmFkddViN4qgaB19QO9_ZgPNKJ4Av7Nv4jSZRl1ox0ZfEwNujq5W0mRWePdO_RzI6pq5wBZ-rVF9YUgmgUYUQPBolqehxaoRTAMBWSwK4lEcNHrJ2e17G87B8fATIwTF5jc3mMBO5hWGr";
 
 
   /*
@@ -58,12 +58,14 @@ module.exports.spotify = async function(){
 
         spotifyApi.getMyCurrentPlayingTrack().then(
         function (data) {
-            var artists =data.body.item.artists[0].name;
-            data.body.item.artists.slice(1).forEach(element => {
-                artists += ", " + element.name;
-            });
-            myCurrentPlay.Artists=artists;
-            myCurrentPlay.Name=data.body.item.name;
+            if (data.body.item){
+                var artists =data.body.item.artists[0].name;
+                data.body.item.artists.slice(1).forEach(element => {
+                    artists += ", " + element.name;
+                });
+                myCurrentPlay.Artists=artists;
+                myCurrentPlay.Name=data.body.item.name;
+            }
         },
         function (err) {
             console.log("Something went wrong!", err);

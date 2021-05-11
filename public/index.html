@@ -31,8 +31,8 @@
 
         <!-- module timer -->
         <div class="uk-position-large uk-position-top-right"> 
-            <button id="button" style="color: white" class="uk-button uk-button-default ">Timer</button>
-            <h1 style="color: white"><span id="timer">30</span></h1> 
+            <h1 style="color: white"><span id="date">date</span></h1> 
+            <h1 style="color: white"><span id="hour">hour</span></h1> 
         </div>
         
         <!-- module météo -->
@@ -71,6 +71,12 @@
         /*Timer*/
         ipcRenderer.on('timer', (event,data) => { 
             document.getElementById('timer').innerHTML = data;    
+        })
+
+        /*Date*/
+        ipcRenderer.on('date', (event,data) => { 
+            document.getElementById('date').innerHTML = data.date;   
+            document.getElementById('hour').innerHTML = data.hour;   
         })
 
         /* news */
