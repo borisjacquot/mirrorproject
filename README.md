@@ -19,6 +19,8 @@ Projet de Titouan AZIMZADEH, Raphaël BONVALET, Boris JACQUOT, Théotim RAGUET e
 
 ```
 OPENWEATHER=YOUR_API_TOKEN
+DB_USER=YOUR_DB_USERNAME
+DB_PASS=YOUR_DB_PASSWORD
 ```
 
 2. In a command prompt, use `npm i`
@@ -30,7 +32,7 @@ OPENWEATHER=YOUR_API_TOKEN
 
 ### Electron
 
-*todo*
+Electron nous sert uniquement d'affichage.
 
 ### Modules
 
@@ -40,10 +42,12 @@ News : affiche les titres des derniers articles d'un média choisi parmi les dis
 
 Meteo : Affiche la température et la description de la météo.
 
+TODO
+
 ## Auteurs
 
 **Boris Jacquot** - *electron*
 
 **Titouan Azimzadeh** - *calendrier, news*
 
-**Raphaël Bonvalet** - *météo*
+**Raphaël Bonvalet** - *météo, spotify*
