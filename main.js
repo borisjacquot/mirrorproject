@@ -6,6 +6,7 @@ const date_ob = require('./modules/date.js');
 const calendar = require("./modules/calendar_module");
 const news = require("./modules/news_module");
 const {ipcMain}  = require('electron');
+require('./modules/dbConfig');
 
 calendar.download_calendar(); // on dl le calendar
 // console.log(news.news()); // TODO

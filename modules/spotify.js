@@ -52,7 +52,7 @@ module.exports.spotify = async function(){
             }
         },
         function (err) {
-            console.log("Something went wrong!", err);
+            //console.log("Something went wrong!", err);
         }
         );
 
@@ -68,7 +68,7 @@ module.exports.spotify = async function(){
             }
         },
         function (err) {
-            console.log("Something went wrong!", err);
+            //console.log("Something went wrong!", err);
         }
         );
     });
