@@ -59,7 +59,8 @@ function createWindow () {
     setInterval(() => {
         let date= new Date();
         const complete_date = date.getDate() + " " + date_ob.month(date.getMonth()+1) + " " + date.getFullYear(); 
-        const hour = date.getHours() + ":" + date.getMinutes();
+        const minutes = date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
+        const hour = date.getHours() + ":" + minutes;
         const date_plus_hour = {"date": complete_date,"hour": hour}
         win.webContents.send('date',date_plus_hour);
     },1000);
